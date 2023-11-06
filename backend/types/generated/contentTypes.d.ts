@@ -362,12 +362,12 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiPerformancePerformance extends Schema.CollectionType {
-  collectionName: 'performances';
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
   info: {
-    singularName: 'performance';
-    pluralName: 'performances';
-    displayName: 'Performance';
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'Posts';
     description: '';
   };
   options: {
@@ -379,40 +379,32 @@ export interface ApiPerformancePerformance extends Schema.CollectionType {
     };
   };
   attributes: {
-    Name: Attribute.String &
+    name: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    featuredImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.UID<'api::post.post', 'name'> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    Description: Attribute.Text &
-      Attribute.Required &
+    description: Attribute.RichText &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    Date: Attribute.Date &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    Length: Attribute.Time &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    Director: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    preview: Attribute.Media &
+    shortDescription: Attribute.RichText &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -421,22 +413,14 @@ export interface ApiPerformancePerformance extends Schema.CollectionType {
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::performance.performance',
-      'oneToOne',
-      'admin::user'
-    > &
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::performance.performance',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     localizations: Attribute.Relation<
-      'api::performance.performance',
+      'api::post.post',
       'oneToMany',
-      'api::performance.performance'
+      'api::post.post'
     >;
     locale: Attribute.String;
   };
@@ -767,7 +751,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::performance.performance': ApiPerformancePerformance;
+      'api::post.post': ApiPostPost;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

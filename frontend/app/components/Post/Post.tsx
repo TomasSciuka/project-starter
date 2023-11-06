@@ -1,35 +1,36 @@
+import urlBuilder from '../../../utils/imageUrl'
+
 interface Post {
   name: string,
-  description: string,
-  date: string,
-  length: string,
-  director: string,
-  preview: string
+  shortDescription: string,
+  slug: string,
+  featuredImage: {
+    data: {
+      attributes: {
+        url: string
+      }
+    }
+  }
 }
-const Post = ({ name, description, date, director, preview, length }: Post) => (
-  <article key={name} className="flex max-w-xl flex-col items-start justify-between">
-    <div className="flex items-center gap-x-4 text-xs">
-      <time dateTime={date} className="text-gray-500">
-        Release date: {date}
-      </time>
+const Post = ({ name, shortDescription, slug, featuredImage }: Post) => (
+  <article className="relative isolate flex flex-col gap-8 lg:flex-row">
+    <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+      <img
+        src={urlBuilder(featuredImage?.data?.attributes?.url)}
+        alt=""
+        className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
+      />
+      <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
     </div>
-    <time className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
-      Length: {length}
-    </time>
-    <img src={preview} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
-    <div className="group relative">
-      <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-        <span className="absolute inset-0" />
-        {name}
-      </h3>
-      <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{description}</p>
-    </div>
-    <div className="relative mt-8 flex items-center gap-x-4">
-      <div className="text-sm leading-6">
-        <p className="font-semibold text-gray-900">
-          <span className="absolute inset-0" />
-          {director}
-        </p>
+    <div>
+      <div className="group relative max-w-xl">
+        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+          <a href={`/${slug}`}>
+            <span className="absolute inset-0" />
+            {name}
+          </a>
+        </h3>
+        <p className="mt-5 text-sm leading-6 text-gray-600">{shortDescription}</p>
       </div>
     </div>
   </article>

@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "performances",
+  "collectionName": "posts",
   "info": {
-    "singularName": "performance",
-    "pluralName": "performances",
-    "displayName": "Performance",
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Posts",
     "description": ""
   },
   "options": {
@@ -16,42 +16,7 @@
     }
   },
   "attributes": {
-    "Name": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string",
-      "required": true
-    },
-    "Description": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "text",
-      "required": true
-    },
-    "Date": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "date",
-      "required": true
-    },
-    "Length": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "time"
-    },
-    "Director": {
+    "name": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -59,7 +24,7 @@
       },
       "type": "string"
     },
-    "preview": {
+    "featuredImage": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -74,6 +39,32 @@
           "localized": true
         }
       }
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "shortDescription": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }
